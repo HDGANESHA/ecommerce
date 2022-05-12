@@ -1,8 +1,9 @@
-import Sidebar from '../component/Sidebar';
+import Sidebar from '../component/sidebar';
 
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { Form, Input, message, Button, Space, Card } from "antd";
+import { Form, Input, message, Button,Select,Space, Card } from "antd";
+// const { Option } = Select;
 import {
     LeftOutlined
 } from "@ant-design/icons";
@@ -88,27 +89,72 @@ function Adduser() {
                 <Form.Item
                     name="email"
                     label="email"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Email cannot be empty",
+                        },
+                        {
+                            type: "email",
+                            message: "The input is not valid E-mail!",
+                        },
+                        {
+                            max: 50,
+                            message: "Too long!",
+                        },
+                    ]}
                 >
                     <Input.TextArea placeholder="Enter email" />
                 </Form.Item>
                 <Form.Item
                     name="password"
                     label="password"
+                    rules={[
+                        {
+                            required: true,
+                        },
+                        {
+                            type: "string",
+                            min: 6,
+                            message: "minimum 6 length password !",
+                        },
+                        {
+                            type: "string",
+                            max: 15,
+                            message: "Too long !",
+                        },
+
+                    ]}
                 >
                     <Input.TextArea placeholder="Enter password" />
                 </Form.Item>
                 <Form.Item
                     name="phoneNumber"
                     label="phoneNumber"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Phone Number cannot be empty",
+                        },
+                        {
+                            max: 10,
+                            message: "Cannot be more than 10 digits",
+                        },
+                        {
+                            min: 10,
+                            message: "Cannot be less than 10 digits",
+                        },
+                    ]}
                 >
                     <Input.TextArea placeholder="Enter phoneNumber" />
                 </Form.Item>
-                <Form.Item
-                    name="gender"
-                    label="gender"
-                >
-                    <Input.TextArea placeholder="Enter gender" />
-                </Form.Item>
+                {/* <Form.Item name="gender" label="Gender">
+                    <Select placeholder="select your gender">
+                        <Option value="male">Male</Option>
+                        <Option value="female">Female</Option>
+                        <Option value="other">Other</Option>
+                    </Select>
+                </Form.Item> */}
 
                 <Form.Item>
                     <Space>

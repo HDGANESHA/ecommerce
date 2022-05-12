@@ -48,6 +48,7 @@ function Login() {
                         localStorage.setItem('token', response.data.jwt);
                         localStorage.setItem('userId', response.data.data.userId);
                         localStorage.setItem('userName', response.data.data.userName);
+                        localStorage.setItem("isAuthenticated", "true");
                         navigate('/pages/dashboard');
                     }
                     else {
@@ -80,7 +81,7 @@ function Login() {
                             <form onSubmit={formik.handleSubmit}>
                                 <TextField
                                     fullWidth
-                                    id="email"
+                                    id="lgemail"
                                     name="email"
                                     label="Email"
                                     value={formik.values.email}
@@ -91,7 +92,7 @@ function Login() {
                                 <br />
                                 <TextField
                                     fullWidth
-                                    id="passwords"
+                                    id="lgpasswords"
                                     name="passwords"
                                     label="Password"
                                     type="password"

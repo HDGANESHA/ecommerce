@@ -1,5 +1,5 @@
 
-// import './Users.css';
+import './Users.css';
 
 import {
     Table,
@@ -17,7 +17,7 @@ import {
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import Sidebar from '../component/Sidebar'
+import Sidebar from '../component/sidebar'
 
 
 
@@ -53,7 +53,7 @@ const EditableCell = ({
         </td>
     );
 };
-function Categories() {
+function Users() {
 
     let navigate = useNavigate();
     const [form] = Form.useForm();
@@ -63,12 +63,14 @@ function Categories() {
 
     useEffect(() => {
         console.log("checking");
-        fetch("http://localhost/ecommerceapi/api/viewcategories.php")
+        fetch("http://localhost/ecommerceapi/api/viewuser.php")
             .then((res) => res.json())
             .then(
                 (result) => {
                     setData(result);
+                    setRefresh(refresh + 1);
                     console.log(result);
+                    setRefresh(false);
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -82,38 +84,41 @@ function Categories() {
 
 
 
-    const isEditing = (record) => record.categoryId === editingKey;
+    const isEditing = (record) => record.userId === editingKey;
 
     const edit = (record) => {
         form.setFieldsValue({
-            categoryId: "",
-            categoryName: "",
+            userId: "",
+            userName: "",
 
-            description: "",
+            email: "",
+            phoneNumber: "",
+            gender: "",
+
             ...record,
         });
-        console.log(record.categoryId);
-        setEditingKey(record.categoryId);
+        console.log(record.userId);
+        setEditingKey(record.userId);
     };
 
     const cancel = () => {
         setEditingKey("");
     };
 
-    const deletecategory = (record) => {
+    const deleteUser = (record) => {
         console.log(record);
-        console.log(record.categoryId);
-        console.log(JSON.stringify({ categoryId: record.categoryId }))
-        fetch("http://localhost/ecommerceapi/api/delete-category.php", {
+        console.log(record.userId);
+        console.log(JSON.stringify({ userId: record.userId }))
+        fetch("http://localhost/ecommerceapi/api/delete-user.php", {
 
-            body: JSON.stringify({ userId: record.categoryId }),
+            body: JSON.stringify({ userId: record.userId }),
 
             method: "DELETE",
         })
             .then((res) => res.json())
             .then(
                 (result) => {
-                    if (result.message === "category was deleted.") {
+                    if (result.message === "user was deleted.") {
                         console.log(result);
                         message.success(result.message);
                         setRefresh(refresh + 1);
@@ -129,14 +134,14 @@ function Categories() {
             );
     };
 
-    const save = async () => {
+    const saves = async () => {
         try {
             const row = await form.validateFields();
             // let data = JSON.stringify(row);
             // console.log(data);
 
             //Inserting form values to db
-            fetch("http://localhost/ecommerceapi/api/edit-category.php", {
+            fetch("http://localhost/ecommerceapi/api/edit-user.php", {
                 body: JSON.stringify(row),
                 method: "PUT",
             })
@@ -169,7 +174,7 @@ function Categories() {
     const styler = {
         paddingLeft: "100px",
 
-        width: "900px"
+        width: "1200px"
     }
 
     const columns = [
@@ -177,9 +182,9 @@ function Categories() {
 
             title: "Id",
 
-            dataIndex: "categoryId",
+            dataIndex: "userId",
 
-            key: "categoryId",
+            key: "userId",
 
             editable: true,
 
@@ -188,11 +193,11 @@ function Categories() {
 
         {
 
-            title: "category",
+            title: "Name",
 
-            dataIndex: "categoryName",
+            dataIndex: "userName",
 
-            key: "categoryName",
+            key: "userName",
 
             editable: true,
 
@@ -200,11 +205,11 @@ function Categories() {
 
         {
 
-            title: "Description",
+            title: "Email",
 
-            dataIndex: "description",
+            dataIndex: "email",
 
-            key: "description",
+            key: "email",
             editable: true,
 
         },
@@ -212,16 +217,40 @@ function Categories() {
 
 
         {
-            title: "Operation",
-            dataIndex: "categoryId",
+
+            title: "PhoneNumber",
+
+            dataIndex: "phoneNumber",
+
+            key: "phoneNumber",
+            editable: true,
+
+        },
+
+        {
+
+            title: "Gender",
+
+            dataIndex: "gender",
+
+            key: "gender",
+            editable: true,
+
+
+        },
+
+
+        {
+            title: "Operations",
+            dataIndex: "userId",
             width: "10%",
             render: (_, record) => {
                 const editable = isEditing(record);
                 return editable ? (
                     <span>
                         <Typography.Link
-                            id={record.categoryId}
-                            onClick={save}
+                            id={record.userId}
+                            onClick={saves}
                         >
                             Save
                         </Typography.Link>
@@ -239,10 +268,10 @@ function Categories() {
                         >
                             <EditTwoTone />
                         </Typography.Link>
-                        <Typography.Link id={record.categoryId}>
+                        <Typography.Link id={record.userId}>
                             <Popconfirm
                                 title="Sure to delete?"
-                                onConfirm={() => deletecategory(record)}
+                                onConfirm={() => deleteUser(record)}
                             >
                                 <DeleteTwoTone twoToneColor="#eb2f96" />
                             </Popconfirm>
@@ -276,6 +305,7 @@ function Categories() {
         letterSpacing: '3px'
     }
     const move = () => {
+        localStorage.clear();
         navigate('../../');
     }
 
@@ -295,7 +325,7 @@ function Categories() {
 
                 </div>
                 <div className="alfi">
-                    <div className="headerbox">
+                    <div class="headerbox">
                         <h1 style={inp}>Welcome Ganesh</h1>
                         <button className="clkbtn" onClick={move}>Sign Out</button>
 
@@ -314,15 +344,15 @@ function Categories() {
 
                                 {/* <RiTeamFill /> */}
 
-                                Category
+                                Users
 
                             </h1>
 
                             <Button
                                 type="primary"
-                                onClick={() => navigate("../pages/Addcategory")}
+                                onClick={() => navigate("/addUsers")}
                             >
-                                Add Category
+                                Add User
                             </Button>
                             <br />
 
@@ -340,7 +370,7 @@ function Categories() {
                                     cell: EditableCell,
                                 },
                             }}
-                            rowKey={(record) => record.categoryId}
+                            rowKey={(record) => record.userId}
                             bordered
                             dataSource={data}
                             columns={mergedColumns}
@@ -362,4 +392,4 @@ function Categories() {
 
 }
 
-export default Categories;
+export default Users;

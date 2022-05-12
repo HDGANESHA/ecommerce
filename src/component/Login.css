@@ -89,8 +89,8 @@
     margin-top: 20px
 }
 
-input[type="text"] {
-    height: 45px;
+#lgemail{
+    height: 30px;
     width: 100%;
     border: none;
     outline: 0;
@@ -100,8 +100,8 @@ input[type="text"] {
     border: 1px solid #fff
 }
 
-input[type="password"] {
-    height: 45px;
+#lgpasswords{
+    height: 30px;
     width: 100%;
     border: none;
     outline: 0;

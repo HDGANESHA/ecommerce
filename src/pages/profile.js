@@ -1,4 +1,4 @@
-import Sidebar from '../component/Sidebar';
+import Sidebar from '../component/sidebar';
 import { useNavigate } from "react-router-dom";
 import './Profile.css'
 import React, { useState, useEffect } from 'react';
@@ -88,14 +88,14 @@ function Profile() {
             .then((res) => res.json())
             .then(
                 (result) => {
-                    setValv(result);
+                    // setValv(result);
                     console.log(result);
                     productData = result;
                     finalResult = productData;
-                    setRefresh(refresh + 1);
-                    console.log(productData.userName);
+                    // setRefresh(refresh + 1);
+                    // console.log(productData.userName);
                     // console.log(refresh);
-                    setRefresh(false);
+                    // setRefresh(false);
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -104,8 +104,12 @@ function Profile() {
                     console.log(error);
                 }
             );
-    }, [refresh]);
-
+    }, []);
+    // if (valv) {
+    //     productData = valv;
+    //     finalResult = productData;
+    //     console.log(productData);
+    // }
     const formiks = useFormik({
         initialValues: {
             userName: productData.userName,
@@ -256,6 +260,7 @@ function Profile() {
         letterSpacing: '3px'
     }
     const move = () => {
+        localStorage.clear();
         navigate('../../');
     }
     const fun = {

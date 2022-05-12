@@ -1,8 +1,8 @@
 
 import './Dashboard.css'
-import Customers from "./Customers";
+import Customers from "./customers";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../component/Sidebar";
+import Sidebar from "../component/sidebar";
 import { FaBlackberry } from "react-icons/fa";
 function Dashboard() {
     // window.scroll(function () {
@@ -27,6 +27,7 @@ function Dashboard() {
         letterSpacing: '3px'
     }
     const move = () => {
+        localStorage.clear();
         navigate('../../');
     }
     const box = {

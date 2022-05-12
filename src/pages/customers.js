@@ -15,7 +15,7 @@ import {
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import Sidebar from '../component/Sidebar';
+import Sidebar from '../component/sidebar';
 
 import './Customers.css';
 const EditableCell = ({
@@ -372,7 +372,7 @@ function Customers() {
                             </h1>
                             <Button
                                 type="primary"
-                                onClick={() => navigate("../pages/Addcustomer")}
+                                onClick={() => navigate("/addCustomer")}
                             >
                                 Add Customers
                             </Button>

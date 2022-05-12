@@ -1,5 +1,5 @@
 
-import './Users.css';
+// import './Users.css';
 
 import {
     Table,
@@ -17,7 +17,7 @@ import {
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import Sidebar from '../component/Sidebar'
+import Sidebar from '../component/sidebar'
 
 
 
@@ -53,7 +53,7 @@ const EditableCell = ({
         </td>
     );
 };
-function Users() {
+function Categories() {
 
     let navigate = useNavigate();
     const [form] = Form.useForm();
@@ -63,14 +63,12 @@ function Users() {
 
     useEffect(() => {
         console.log("checking");
-        fetch("http://localhost/ecommerceapi/api/viewuser.php")
+        fetch("http://localhost/ecommerceapi/api/viewcategories.php")
             .then((res) => res.json())
             .then(
                 (result) => {
                     setData(result);
-                    setRefresh(refresh + 1);
                     console.log(result);
-                    setRefresh(false);
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -84,41 +82,38 @@ function Users() {
 
 
 
-    const isEditing = (record) => record.userId === editingKey;
+    const isEditing = (record) => record.categoryId === editingKey;
 
     const edit = (record) => {
         form.setFieldsValue({
-            userId: "",
-            userName: "",
+            categoryId: "",
+            categoryName: "",
 
-            email: "",
-            phoneNumber: "",
-            gender: "",
-
+            description: "",
             ...record,
         });
-        console.log(record.userId);
-        setEditingKey(record.userId);
+        console.log(record.categoryId);
+        setEditingKey(record.categoryId);
     };
 
     const cancel = () => {
         setEditingKey("");
     };
 
-    const deleteUser = (record) => {
+    const deletecategory = (record) => {
         console.log(record);
-        console.log(record.userId);
-        console.log(JSON.stringify({ userId: record.userId }))
-        fetch("http://localhost/ecommerceapi/api/delete-user.php", {
+        console.log(record.categoryId);
+        console.log(JSON.stringify({ categoryId: record.categoryId }))
+        fetch("http://localhost/ecommerceapi/api/delete-category.php", {
 
-            body: JSON.stringify({ userId: record.userId }),
+            body: JSON.stringify({ userId: record.categoryId }),
 
             method: "DELETE",
         })
             .then((res) => res.json())
             .then(
                 (result) => {
-                    if (result.message === "user was deleted.") {
+                    if (result.message === "category was deleted.") {
                         console.log(result);
                         message.success(result.message);
                         setRefresh(refresh + 1);
@@ -134,14 +129,14 @@ function Users() {
             );
     };
 
-    const saves = async () => {
+    const save = async () => {
         try {
             const row = await form.validateFields();
             // let data = JSON.stringify(row);
             // console.log(data);
 
             //Inserting form values to db
-            fetch("http://localhost/ecommerceapi/api/edit-user.php", {
+            fetch("http://localhost/ecommerceapi/api/edit-category.php", {
                 body: JSON.stringify(row),
                 method: "PUT",
             })
@@ -174,7 +169,7 @@ function Users() {
     const styler = {
         paddingLeft: "100px",
 
-        width: "1200px"
+        width: "900px"
     }
 
     const columns = [
@@ -182,9 +177,9 @@ function Users() {
 
             title: "Id",
 
-            dataIndex: "userId",
+            dataIndex: "categoryId",
 
-            key: "userId",
+            key: "categoryId",
 
             editable: true,
 
@@ -193,11 +188,11 @@ function Users() {
 
         {
 
-            title: "Name",
+            title: "category",
 
-            dataIndex: "userName",
+            dataIndex: "categoryName",
 
-            key: "userName",
+            key: "categoryName",
 
             editable: true,
 
@@ -205,11 +200,11 @@ function Users() {
 
         {
 
-            title: "Email",
+            title: "Description",
 
-            dataIndex: "email",
+            dataIndex: "description",
 
-            key: "email",
+            key: "description",
             editable: true,
 
         },
@@ -217,40 +212,16 @@ function Users() {
 
 
         {
-
-            title: "PhoneNumber",
-
-            dataIndex: "phoneNumber",
-
-            key: "phoneNumber",
-            editable: true,
-
-        },
-
-        {
-
-            title: "Gender",
-
-            dataIndex: "gender",
-
-            key: "gender",
-            editable: true,
-
-
-        },
-
-
-        {
-            title: "Operations",
-            dataIndex: "userId",
+            title: "Operation",
+            dataIndex: "categoryId",
             width: "10%",
             render: (_, record) => {
                 const editable = isEditing(record);
                 return editable ? (
                     <span>
                         <Typography.Link
-                            id={record.userId}
-                            onClick={saves}
+                            id={record.categoryId}
+                            onClick={save}
                         >
                             Save
                         </Typography.Link>
@@ -268,10 +239,10 @@ function Users() {
                         >
                             <EditTwoTone />
                         </Typography.Link>
-                        <Typography.Link id={record.userId}>
+                        <Typography.Link id={record.categoryId}>
                             <Popconfirm
                                 title="Sure to delete?"
-                                onConfirm={() => deleteUser(record)}
+                                onConfirm={() => deletecategory(record)}
                             >
                                 <DeleteTwoTone twoToneColor="#eb2f96" />
                             </Popconfirm>
@@ -305,6 +276,7 @@ function Users() {
         letterSpacing: '3px'
     }
     const move = () => {
+        localStorage.clear();
         navigate('../../');
     }
 
@@ -324,7 +296,7 @@ function Users() {
 
                 </div>
                 <div className="alfi">
-                    <div class="headerbox">
+                    <div className="headerbox">
                         <h1 style={inp}>Welcome Ganesh</h1>
                         <button className="clkbtn" onClick={move}>Sign Out</button>
 
@@ -343,15 +315,15 @@ function Users() {
 
                                 {/* <RiTeamFill /> */}
 
-                                Users
+                                Category
 
                             </h1>
 
                             <Button
                                 type="primary"
-                                onClick={() => navigate("../pages/Addusers")}
+                                onClick={() => navigate("../pages/Addcategory")}
                             >
-                                Add User
+                                Add Category
                             </Button>
                             <br />
 
@@ -369,7 +341,7 @@ function Users() {
                                     cell: EditableCell,
                                 },
                             }}
-                            rowKey={(record) => record.userId}
+                            rowKey={(record) => record.categoryId}
                             bordered
                             dataSource={data}
                             columns={mergedColumns}
@@ -391,4 +363,4 @@ function Users() {
 
 }
 
-export default Users;
+export default Categories;

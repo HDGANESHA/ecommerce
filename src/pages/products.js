@@ -1,4 +1,4 @@
-import Sidebar from "../component/Sidebar";
+import Sidebar from "../component/sidebar";
 import { useNavigate } from "react-router-dom";
 
 function Products() {
@@ -10,6 +10,7 @@ function Products() {
         letterSpacing: '3px'
     }
     const move = () => {
+        localStorage.clear();
         navigate('../../');
     }
     return (<>
