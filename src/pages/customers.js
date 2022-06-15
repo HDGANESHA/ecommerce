@@ -76,29 +76,7 @@ function Customers() {
             );
     }, [refresh]);
 
-    // Search filter
-    // const search = (value) => {
-    //     if (value === "") {
-    //         setRefresh(refresh + 1);
-    //     }
-    //     else {
-    //         fetch(`http://localhost/RESTAPI/ecommerce/api/categories/search.php?s=${value}`)
-    //             .then((res) => res.json())
-    //             .then(
-    //                 (result) => {
-    //                     setData(result.records);
-    // console.log(result.records);
-    // },
-    // Note: it's important to handle errors here
-    // instead of a catch() block so that we don't swallow
-    // exceptions from actual bugs in components.
-    //                 (error) => {
-    //                     console.log(error);
-    //                 }
-    //             );
-    //     }
-    // };
-
+    
     const isEditing = (record) => record.customerId === editingKey;
 
     const edit = (record) => {

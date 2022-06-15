@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Sidebar from '../component/sidebar'
 
-
+import SidebarHead from "../component/Sidebarhead/sidebarHead";
 
 
 const EditableCell = ({
@@ -282,27 +282,15 @@ function Categories() {
 
     return (
 
-        <div>
+        <div >
 
 
 
 
-
-            <div className="row">
-
-                <div className="col-2 menu">
-
-                    <Sidebar />
-
-                </div>
-                <div className="alfi">
-                    <div className="headerbox">
-                        <h1 style={inp}>Welcome Ganesh</h1>
-                        <button className="clkbtn" onClick={move}>Sign Out</button>
-
-                    </div>
-                </div>
-
+            <SidebarHead />
+            <div className="maincon">
+               
+                
 
 
                 <div className="col-10">
@@ -321,7 +309,7 @@ function Categories() {
 
                             <Button
                                 type="primary"
-                                onClick={() => navigate("../pages/Addcategory")}
+                                onClick={() => navigate("pages/AddCategory")}
                             >
                                 Add Category
                             </Button>

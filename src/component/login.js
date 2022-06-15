@@ -49,7 +49,7 @@ function Login() {
                         localStorage.setItem('userId', response.data.data.userId);
                         localStorage.setItem('userName', response.data.data.userName);
                         localStorage.setItem("isAuthenticated", "true");
-                        navigate('/pages/dashboard');
+                        navigate('/pages/dashboardNew');
                     }
                     else {
                         alert('Invalid Credentials Please try again');

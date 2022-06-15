@@ -1,0 +1,9 @@
+.cent {
+    padding-left: 550px;
+    padding-top: 350px;
+   
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}

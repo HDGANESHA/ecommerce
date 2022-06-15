@@ -16,6 +16,8 @@ import Profile from './pages/profile';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Login from './component/login';
 import Sidebarhead from './component/Sidebarhead/sidebarHead';
+import DashboardNew from './pages/dashboardNew';
+import ProfileNew from './pages/profileNew';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -44,11 +46,17 @@ root.render(
         <Route path="/addusers" element={<ProtectedRoute />}>
           <Route exact path="/addusers" element={<Addusers />} />
         </Route>
-        <Route path="/pages/addcategory" element={<ProtectedRoute />}>
-          <Route exact path="/pages/addcategory" element={<Addcategory />} />
+        <Route path="/addcategory" element={<ProtectedRoute />}>
+          <Route exact path="/addcategory" element={<Addcategory />} />
         </Route>
         <Route path="/pages/profile" element={<ProtectedRoute />}>
           <Route exact path="/pages/profile" element={<Profile />} />
+        </Route>
+        <Route path="/pages/profileNew" element={<ProtectedRoute />}>
+          <Route exact path="/pages/profileNew" element={<ProfileNew />} />
+        </Route>
+        <Route path="/pages/dashboardNew" element={<ProtectedRoute />}>
+          <Route exact path="/pages/dashboardNew" element={<DashboardNew />} />
         </Route>
         {/* <Route path="/pages/users" element={<Users />} exact />
         <Route path="/pages/categories" element={<Categories />} exact />
@@ -57,7 +65,9 @@ root.render(
         <Route path="/pages/addusers" element={<Addusers />} exact />
         <Route path="/pages/addcategory" element={<Addcategory />} exact />
         <Route path="/pages/profile" element={<Profile />} exact /> */}
-        <Route path="/Sidebarhead/sidebarHead" element={<Sidebarhead />} exact />
+        {/* <Route path="/Sidebarhead/sidebarHead" element={<Sidebarhead />} exact />
+        <Route path="/pages/dashboardNew" element={<DashboardNew />} exact />  */}
+        <Route path="/pages/profileNew" element={<ProfileNew />} exact /> 
 
       </Routes>
     </BrowserRouter>

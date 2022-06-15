@@ -7,6 +7,7 @@ import {
     LeftOutlined
 } from "@ant-design/icons";
 import './Customers.css';
+import SidebarHead from '../component/Sidebarhead/sidebarHead';
 function Addcategory() {
     let navigate = useNavigate();
     const inp = {
@@ -53,14 +54,9 @@ function Addcategory() {
         form.resetFields();
     };
     return (<>
-        <Sidebar />
-        <div className="alfi">
-            <div class="headerbox">
-                <h1 style={inp}>Welcome Ganesh</h1>
-                <button className="clkbtn" onClick={move}>Sign Out</button>
-
-            </div>
-        </div>
+        
+        <div className='maincon'>
+            <SidebarHead/>
         <LeftOutlined style={{ color: "purple", fontSize: 30 }} onClick={() => navigate("/admin/categories")} />
         <Card title=" Add Category" style={{ width: "50%", margin: "auto", gap: 10 }}>
             <Form
@@ -106,7 +102,9 @@ function Addcategory() {
                     </Space>
                 </Form.Item>
             </Form>
-        </Card></>);
+            </Card>
+        </div>
+    </>);
 }
 
 export default Addcategory;

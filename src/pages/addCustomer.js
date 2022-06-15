@@ -9,6 +9,7 @@ import {
     LeftOutlined
 } from "@ant-design/icons";
 import './Customers.css';
+import SidebarHead from '../component/Sidebarhead/sidebarHead';
 function Addcustomer() {
     let navigate = useNavigate();
     const inp = {
@@ -55,14 +56,9 @@ function Addcustomer() {
         form.resetFields();
     };
     return (<>
-        <Sidebar />
-        <div className="alfi">
-            <div class="headerbox">
-                <h1 style={inp}>Welcome Ganesh</h1>
-                <button className="clkbtn" onClick={move}>Sign Out</button>
-
-            </div>
-        </div>
+        <SidebarHead/>
+        
+       <div className='maincon'>
         <LeftOutlined style={{ color: "purple", fontSize: 30 }} onClick={() => navigate("/admin/categories")} />
         <Card title=" Add Customer" style={{ width: "50%", margin: "auto", gap: 10 }}>
             <Form
@@ -198,7 +194,9 @@ function Addcustomer() {
                     </Space>
                 </Form.Item>
             </Form>
-        </Card></>);
+            </Card>
+        </div>
+    </>);
 }
 
 export default Addcustomer;

@@ -95,7 +95,9 @@
 /* Style the counter cards */
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: .3em;
     padding: 16px;
+    font-size: 2rem;
     text-align: center;
     background-color: #f1f1f1;
 }
